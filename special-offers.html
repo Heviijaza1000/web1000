@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Special Offers - Glow Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #ffe5ec;
+      color: #333;
+    }
+    .offers-container {
+      max-width: 900px;
+      margin: 40px auto 0;
+      padding: 0 20px;
+    }
+    .offer {
+      background: linear-gradient(90deg, #fbc2eb 60%, #a8e6cf 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      transition: transform 0.2s;
+    }
+    .offer:hover { transform: translateY(-6px) scale(1.02);}
+    .offer-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      object-fit: cover;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+    .offer-details h2 {
+      margin: 0 0 10px 0;
+      color: #b15373;
+      font-size: 28px;
+    }
+    .offer-details p {
+      margin: 0;
+      font-size: 17px;
+    }
+    .need-help {
+      background: #f5dce6;
+      border-radius: 15px;
+      padding: 24px;
+      margin: 40px auto 0;
+      max-width: 700px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      text-align: center;
+    }
+    .need-help h3 {
+      color: #b15373;
+      margin-bottom: 12px;
+    }
+    .need-help p {
+      margin-bottom: 10px;
+    }
+    .special-link {
+      color: #96234a !important;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .special-link:hover {
+      color: #a92b6a !important;
+    }
+    footer {
+      background-color: #ffebf0;
+      padding: 40px 20px;
+      color: #444;
+      margin-top: 50px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .footer-links a {
+  color: #723147;           /* Use any color you like */
+  text-decoration: underline;    /* Removes underline, optional */
+  transition: color 0.3s;
+}
+.footer-links a:hover {
+  color: #a92b6a;           /* Hover color, optional */
+}
+
+    .footer-links h4 {
+      margin-bottom: 10px;
+      color: #b15373;
+    }
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-links li {
+      margin: 5px 0;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    .footer-links li:hover {
+      color: #8b3f5b;
+    }
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      font-size: 22px;
+    }
+    .social-icons a {
+      color: #444;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: #b15373;
+    }
+    .copyright {
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+    @media (max-width: 600px) {
+      .offers-container {padding: 0 5px;}
+      .offer {flex-direction: column; text-align: center;}
+      .offer-img {margin-bottom: 16px;}
+      .footer-links {flex-direction: column; gap: 20px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="offers-container">
+    <div class="offer">
+      <img src="jj.avif" alt="Offer 1" class="offer-img">
+      <div class="offer-details">
+        <h2>Spring Glow Sale</h2>
+        <p>Enjoy up to <strong>30% off</strong> on selected skincare and makeup essentials. Limited time only!</p>
+      </div>
+    </div>
+    <div class="offer" style="background: linear-gradient(90deg, #e0c3fc 60%, #a8e6cf 100%);">
+      <img src="hh.jpg" alt="Offer 2" class="offer-img">
+      <div class="offer-details">
+        <h2>Buy 1 Get 1 Free</h2>
+        <p>Buy any lipstick and get another one <strong>free</strong>! Mix and match your favorite shades.</p>
+      </div>
+    </div>
+    <div class="offer" style="background: linear-gradient(90deg, #fbc2eb 60%, #a8e6cf 100%);">
+      <img src="ll.jpeg" alt="Offer 3" class="offer-img">
+      <div class="offer-details">
+        <h2>Free Gift with Purchase</h2>
+        <p>Receive a <strong>complimentary mini perfume</strong> with every order over $75.</p>
+      </div>
+    </div>
+    <div class="need-help">
+      <h3>Need Help?</h3>
+      <p>Have questions about these offers or need product advice?</p>
+      <p>
+        <a href="contact.html" class="special-link">Contact our support team</a> or visit our 
+        <a href="faqs.html" class="special-link">FAQs</a>.
+      </p>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-links">
+      <div>
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="returns.html">Returns</a></li>
+          <li><a href="faqs.html">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About Glow Store</h4>
+        <ul>
+          <li><a href="mission.html">Our Mission</a></li>
+          <li><a href="sustainability.html">Sustainability</a></li>
+          <li><a href="press.html">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Glow Store. All rights reserved.</p>
+  </footer>
+</body>
+</html>
