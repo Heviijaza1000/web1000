@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Makeup - Cheeks | Glow Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffe5ec;
+      color: #333;
+    }
+    header {
+      background: #fff;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f3b6c8;
+    }
+    .logo img { height: 50px; }
+    .header-options {
+      display: flex;
+      gap: 14px;
+    }
+    .header-box {
+      padding: 8px 12px;
+      background: #f8f8f8;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: none;
+      color: #b15373;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .header-box:hover { background: #ffe5ec; }
+    h1 {
+      text-align: center;
+      color: #b15373;
+      margin-top: 30px;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 26px;
+      max-width: 1100px;
+      margin: 40px auto 60px auto;
+      padding: 0 16px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      padding: 18px 14px 20px 14px;
+      text-align: center;
+      transition: transform 0.18s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-card:hover { transform: translateY(-6px) scale(1.02);}
+    .product-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background: #ffe5ec;
+    }
+    .product-card h3 {
+      font-size: 17px;
+      margin: 10px 0 6px 0;
+      color: #96234a;
+    }
+    .product-card p {
+      margin: 0 0 12px 0;
+      font-size: 16px;
+      color: #b15373;
+      font-weight: bold;
+    }
+    .add-cart-btn {
+      padding: 8px 16px;
+      background: #b15373;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .add-cart-btn:hover { background: #96234a; }
+    /* Cart Drawer (copy from your main CSS) */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 350px;
+      height: 100%;
+      background: #fff0f6;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.12);
+      z-index: 9999;
+      transition: right 0.4s cubic-bezier(.77,0,.18,1);
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+    .cart-drawer.open { right: 0; }
+    .cart-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 24px 14px 24px;
+      border-bottom: 1px solid #f3b6c8;
+      font-size: 22px;
+      color: #b15373;
+      font-weight: bold;
+    }
+    .close-cart-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #b15373;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+    .cart-drawer-content {
+      padding: 20px 24px;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid #f3b6c8;
+      padding-bottom: 12px;
+    }
+    .cart-item img {
+      width: 54px;
+      height: 54px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .cart-item-title {
+      font-weight: bold;
+      color: #96234a;
+    }
+    .cart-item-price {
+      color: #b15373;
+      font-size: 15px;
+      margin-top: 2px;
+    }
+    .cart-total {
+      margin: 18px 0 10px 0;
+      font-size: 18px;
+      text-align: right;
+      color: #b15373;
+    }
+    .checkout-btn {
+      width: 100%;
+      padding: 12px;
+      background: #b15373;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.3s;
+    }
+    .checkout-btn:hover { background: #96234a; }
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.25);
+      z-index: 9998;
+    }
+    .cart-overlay.open { display: block; }
+    @media (max-width: 600px) {
+      .cart-drawer { width: 100vw; min-width: 0; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="glow.png" alt="Glow Store Logo"></a>
+    </div>
+    <div class="header-options">
+      <a href="special-offers.html" class="header-box">Special Offers</a>
+      <a href="about.html" class="header-box">About</a>
+      <div class="header-box" id="openCartDrawer">
+        <i class="fas fa-shopping-cart"></i> Cart
+      </div>
+    </div>
+  </header>
+  <h1>Makeup - Cheeks</h1>
+  <div class="product-grid">
+    <!-- 12 Cheek Products -->
+    <div class="product-card" data-name="Peachy Blush" data-price="19.99" data-img="blush.jpeg">
+      <img src="blush.jpeg" alt="Peachy Blush">
+      <h3>Peachy Blush</h3>
+      <p>$19.99</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Rosy Blush" data-price="18.99" data-img="rosyblush.jpg">
+      <img src="rosy blush.jpg" alt="Rosy Blush">
+      <h3>Rosy Blush</h3>
+      <p>$18.99</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Cream Blush Stick" data-price="16.50" data-img="creamblush.jpg">
+      <img src="cream blush stick.jpg" alt="Cream Blush Stick">
+      <h3>Cream Blush Stick</h3>
+      <p>$16.50</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Baked Highlighter" data-price="21.99" data-img="bakedhighlighter.jpg">
+      <img src="baked highlighter.jpg" alt="Baked Highlighter">
+      <h3>Baked Highlighter</h3>
+      <p>$21.99</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Face Highlighter" data-price="21.99" data-img="highlight.jpg">
+      <img src="highlight.jpg" alt="Face Highlighter">
+      <h3>Face Highlighter</h3>
+      <p>$21.99</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Bronzer Compact" data-price="18.99" data-img="bronzer.jpeg">
+      <img src="bronzer.jpeg" alt="Bronzer Compact">
+      <h3>Bronzer Compact</h3>
+      <p>$18.99</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Shimmer Stick" data-price="17.50" data-img="shimmerstick.jpg">
+      <img src="shimmer stick.avif" alt="Shimmer Stick">
+      <h3>Shimmer Stick</h3>
+      <p>$17.50</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Contour Palette" data-price="23.00" data-img="contourpalette.jpg">
+      <img src="contour makeup.jpg" alt="Contour Palette">
+      <h3>Contour Palette</h3>
+      <p>$23.00</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Glow Cheek Tint" data-price="15.99" data-img="cheektint.jpg">
+      <img src="glow cheeck tint.webp" alt="Glow Cheek Tint">
+      <h3>Glow Cheek Tint</h3>
+      <p>$15.99</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Liquid Blush" data-price="17.99" data-img="liquidblush.jpg">
+      <img src="liquid blush.webp" alt="Liquid Blush">
+      <h3>Liquid Blush</h3>
+      <p>$17.99</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Powder Blush" data-price="16.99" data-img="powderblush.jpg">
+      <img src="powder blush.jpeg" alt="Powder Blush">
+      <h3>Powder Blush</h3>
+      <p>$16.99</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card" data-name="Cheek Brush" data-price="12.99" data-img="cheekbrush.jpg">
+      <img src="cheeck brush.webp" alt="Cheek Brush">
+      <h3>Cheek Brush</h3>
+      <p>$12.99</p>
+      <button class="add-cart-btn">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Cart Drawer (same as your main page) -->
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="cart-drawer-header">
+      <span>Your Cart</span>
+      <button id="closeCartDrawer" class="close-cart-btn">&times;</button>
+    </div>
+    <div class="cart-drawer-content" id="cartDrawerContent">
+      <!-- Cart items will appear here -->
+      <div class="cart-total" id="cartTotal"></div>
+      <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+  <div id="cartOverlay" class="cart-overlay"></div>
+
+  <script>
+    // Cart Drawer Logic
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const openCartBtn = document.getElementById('openCartDrawer');
+    const closeCartBtn = document.getElementById('closeCartDrawer');
+    const cartDrawerContent = document.getElementById('cartDrawerContent');
+    const cartTotal = document.getElementById('cartTotal');
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function openCart() {
+      cartDrawer.classList.add('open');
+      cartOverlay.classList.add('open');
+      renderCart();
+    }
+    function closeCart() {
+      cartDrawer.classList.remove('open');
+      cartOverlay.classList.remove('open');
+    }
+    openCartBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', closeCart);
+
+    // Add to Cart functionality
+    document.querySelectorAll('.add-cart-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.product-card');
+        const name = card.getAttribute('data-name');
+        const price = parseFloat(card.getAttribute('data-price'));
+        const img = card.getAttribute('data-img');
+        const existing = cart.find(item => item.name === name);
+        if (existing) {
+          existing.qty += 1;
+        } else {
+          cart.push({ name, price, img, qty: 1 });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        openCart();
+      });
+    });
+
+    function renderCart() {
+      const content = cart.map(item => `
+        <div class="cart-item">
+          <img src="${item.img}" alt="${item.name}">
+          <div>
+            <div class="cart-item-title">${item.name}</div>
+            <div>Qty: ${item.qty}</div>
+            <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+          </div>
+        </div>
+      `).join('');
+      cartDrawerContent.innerHTML = content +
+        `<div class="cart-total" id="cartTotal"><strong>Total: $${cart.reduce((sum, item) => sum + item.price * item.qty, 0).toFixed(2)}</strong></div>
+        <button class="checkout-btn">Proceed to Checkout</button>`;
+    }
+
+    // Render cart on page load (if cart is open)
+    if (cartDrawer.classList.contains('open')) renderCart();
+  </script>
+</body>
+</html>
